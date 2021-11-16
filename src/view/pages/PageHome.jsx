@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {bindAll} from 'lodash';
 
-import PageHome from "./pages/PageHome"
 
 
-class App extends React.Component {
+class PageHome extends React.Component {
     render() {
         return (
-            <PageHome/>
+            <div className="s">
+                fdskfl
+            </div>
         );
     }
 }
 
-export default App
+export default PageHome
