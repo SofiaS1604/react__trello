@@ -46,11 +46,20 @@ const config = {
             {
                 test: /\.hbs$/,
                 loader: 'handlebars-loader'
+            },
+            {
+                test: /\.(jpg|png|webp|gif|otf|ttf|woff|woff2|ani|eot|svg)$/,
+                use:[
+                    {
+                        loader: `url-loader`,
+                    }
+                ],
+                include: path.resolve(__dirname, "./src/view/images"),
             }
         ]
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx", ".json", ".sass"],
+        extensions: ["*", ".js", ".jsx", ".json", ".styl"],
         alias: {
             view: path.resolve(__dirname, './src/view'),
         }
@@ -62,7 +71,8 @@ const config = {
         contentBase: path.join(__dirname, "public/"),
         port: 3000,
         publicPath: "http://localhost:3000/dist/",
-        hotOnly: true
+        hotOnly: true,
+        hash: false
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -72,7 +82,7 @@ const config = {
             title: "todo list",
             template: "src/html-templates/index.hbs",
             env: "development",
-            hash: true,
+            hash: false,
             inject: false
         }),
         new htmlWebpackHarddiskPlugin(),
