@@ -19,7 +19,7 @@ class CardCreateBoard extends React.Component {
     render() {
         return (
             <div onClick={this.onClick} className="card__item card card--create">
-                <div className="card__title">Create new board</div>
+                <div className="card__title">{this.props.title}</div>
             </div>
         );
     }

@@ -2,7 +2,7 @@
     margin 0
     padding 0
     font-family "Poppins", sans-serif
-    box-sizing: border-box
+    box-sizing border-box
 
 
 .header
@@ -11,88 +11,87 @@
     padding 0 30px
     display grid
     grid-auto-flow column
-    grid-column-gap: 20px
+    grid-column-gap 20px
     align-items center
     justify-content space-between
     &__logo
         border-right 1px solid #e5e5e5
         width fit-content
         padding-right 20px
-        height: 31px
-        padding-top: 1px
+        height 31px
+        padding-top 1px
     &__container
-        display: grid
-        grid-auto-flow: column
+        display grid
+        grid-auto-flow column
         justify-content start
-        grid-column-gap: 5px
+        grid-column-gap 5px
         padding-left 20px
-        height: 32px
-        align-items: center
+        height 32px
+        align-items center
         border-left 1px solid #e5e5e5
     &__search
         & > .search
             &__input
-                background-color: #F4F4F4
-                border: 0
-                border-radius: 25px
-                font-size: 14px
-                padding-top: 5.5px
-                padding-bottom: 5.5px
+                background-color #F4F4F4
+                border 0
+                border-radius 25px
+                font-size 14px
+                padding-top 5.5px
+                padding-bottom 5.5px
                 padding-left 15px
-                width: 500px
+                width 500px
                 padding-right 15px
             &__button
-                border-radius: 25px
-                font-size: 14px
-                padding: 6px 15px 5px
-                border: 0
-                background-color: #e2e2e2
+                border-radius 25px
+                font-size 14px
+                padding 6px 15px 5px
+                border 0
+                background-color #e2e2e2
                 margin-left 10px
-                color: #272F3D
+                color #272F3D
 
 
 .page__main
-    padding-left 45px
-    padding-top 35px
+    padding 35px 45px 0
     display grid
     grid-template-columns repeat(auto-fill, 362px)
     grid-column-gap 30px
     grid-row-gap 20px
 
 .modal-window
-    position: fixed
-    top: 0
-    width: 100vw
-    height: 100vh
-    background-color: rgba(256, 256, 256, 0.5)
-    display: grid
-    justify-content: center
-    align-items: center
+    position fixed
+    top 0
+    width 100vw
+    height 100vh
+    background-color rgba(256, 256, 256, 0.5)
+    display grid
+    justify-content center
+    align-items center
     &__container
-        border-radius: 25px
+        border-radius 25px
         overflow hidden
-        width: 800px
-        height: 600px
-        box-shadow: 0 0 30px -5px rgba(35, 75, 103, 0.5)
+        width 800px
+        height 600px
+        box-shadow 0 0 30px -5px rgba(35, 75, 103, 0.5)
         display grid
-        background-color: white
+        background-color white
         grid-auto-flow column
     &__image
-        background-image: url("https://i.pinimg.com/originals/52/d2/90/52d2908b21ad9427887e01374ef402b3.jpg")
+        background-image url("https://i.pinimg.com/originals/52/d2/90/52d2908b21ad9427887e01374ef402b3.jpg")
         width 400px
-        height: 600px
-        background-size: cover
-        background-position: center
+        height 600px
+        background-size cover
+        background-position center
     &__form
-        width: 400px
-        display: grid
-        grid-auto-flow: row
-        align-self: start
-        padding: 20px
-        grid-row-gap: 25px 
+        width 400px
+        display grid
+        grid-auto-flow row
+        align-self start
+        padding 20px
+        grid-row-gap 25px 
         & > .form
             &__button
-                border-radius: 7px
+                border-radius 7px
                 padding 6px 20px 8px
                 height 41px
                 background-color #fff
@@ -100,14 +99,14 @@
                 outline none
                 margin-left auto
                 margin-right auto
-                width: 115px
+                width 115px
                 border 2px solid #648aa5
                 font-size 16px
                 box-shadow 0 2px 5px rgba(32 36 161 0.3)
                 color #234b67
                 &--close
-                    font-size: 24px
-                    justify-self: end
+                    font-size 24px
+                    justify-self end
                     margin-right 15px
                     color #234b67
                     background-color transparent
@@ -115,16 +114,16 @@
                     cursor pointer
             &__title
                 color #134f7a
-                text-align: center
-                font-size: 24px   
-                margin-top: 50px
+                text-align center
+                font-size 24px   
+                margin-top 50px
             &__container
-                height: fit-content
-                grid-auto-flow: row
-                display: grid
+                height fit-content
+                grid-auto-flow row
+                display grid
                 & textarea
-                    resize: none
-                    display: block
+                    resize none
+                    display block
                 & .form
                     &__input
                         display grid
@@ -132,7 +131,7 @@
                         font-size 16px
                         padding 8px 10px
                         border-radius 7px
-                        border: 2px solid #648aa5
+                        border 2px solid #648aa5
                         outline none
                         box-shadow 0 2px 5px rgba(32 36 161 0.3)
                     &__text
@@ -145,39 +144,144 @@
 
 .card
     &__item
-        width: 362px
-        padding: 20px
-        border-radius: 10px 
-        min-height: 144px
+        width 362px
+        padding 20px
+        border-radius 10px 
+        min-height 144px
+        display grid
+        align-content space-between
     &__title
-        font-weight: 500
+        font-weight 500
         margin-bottom 3px
     &__text
-        color: #959595
-        font-weight: 300
-        font-size: 13px
+        color #959595
+        font-weight 300
+        font-size 13px
     &__arrow
         margin-left auto
-        width: fit-content
-        padding: 3px
+        width fit-content
+        padding 3px
         cursor pointer
-        color: #959595
+        color #959595
+        text-decoration none
     &--create
-        border: 2px dashed rgba(0, 0, 0, 0.2);
-        align-items: center
-        display: grid
+        border 2px dashed rgba(0, 0, 0, 0.2)
+        align-items center
+        display grid
         cursor pointer
+        align-content center
         & .card__title
-            text-align: center
-            font-weight: normal
+            text-align center
+            font-weight normal
 
 
-@keyframes form_find {
-  from {
+@keyframes form_find 
+  from 
       opacity 0
-  }
-
-  to {
+  to 
       opacity 1
- }
-}
+
+
+.info
+    &__title
+        font-size 26px
+        font-weight 500
+    &__description
+        font-size 13px
+        color #8f9497
+
+
+.page_board .main
+    display grid
+    grid-auto-flow row
+    grid-template-columns none
+    padding-bottom 30px
+
+.board
+    &__plus
+        display grid
+        width: 328px
+        justify-content: center
+        font-size: 28px
+        color: #5c5c5c
+        font-weight: 400
+        margin-top: 3px
+        background-color: transparent;
+        border: 0;
+    &__container
+        grid-auto-flow column
+        justify-content space-between
+        display none
+    &__item
+        display grid
+        grid-row-gap 10px
+        width -webkit-fill-available
+        justify-items center
+        border-radius 10px
+        height fit-content
+    &__block, &__card
+        width 362px
+        padding-left 20px
+        padding-right 20px
+    &__block, &__card
+        background-color #F4F4F4
+        align-items center
+        display grid
+        border-radius 10px
+        padding 12.5px 20px
+    &__card
+        padding 20px
+        .card
+            &__description
+                color #929292
+                font-size 13px
+                font-weight 300
+            &__title
+                font-weight 400
+
+    &__block
+        font-weight 500
+        grid-auto-flow column
+        justify-content space-between
+        &--create
+            height 50px
+            align-content center
+            border 2px dashed rgba(0,0,0,0.2)
+            background-color white
+            padding 12.5px 15px
+    &__more
+        font-size 22px
+        color #cdccca
+        letter-spacing -2.5px
+        font-weight bolder
+        line-height 25px
+        text-align center
+        cursor pointer
+    &__button
+        background-color #e2e2e2
+        border 0
+        border-radius 25px
+        font-size 14px
+        padding 4px 15px 3px
+        border 0
+        background-color #e2e2e2
+        margin-left 10px
+        color #272f3d
+    &__input
+        border 0
+        border-radius 25px
+        font-size 14px
+        padding 4px 15px 3px
+        width 163px
+        border 0
+        background-color #f4f4f4
+        color #272f3d
+
+.boards
+    display grid
+    grid-auto-flow column
+    grid-auto-columns 362px
+    grid-column-gap 30px
+    justify-items center
+    overflow-x overlay
+    padding-bottom: 20px

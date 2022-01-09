@@ -2,7 +2,7 @@ import * as React from 'react';
 import {debounce} from 'lodash';
 
 
-class Input extends React.Component {
+class Textarea extends React.Component {
     constructor(props) {
         super(props);
         
@@ -11,14 +11,14 @@ class Input extends React.Component {
       }
 
     onChange(e){
-        this.onChangeDebounced(this.props.typeInput, e.target.value);
+        this.onChangeDebounced('description', e.target.value);
     }
 
     render() {
         return (
-            <input onChange={this.onChange} className={this.props.className} type="text" placeholder={this.props.placeholder} />
+            <textarea onChange={this.onChange} className={this.props.className}></textarea>
         );
     }
 }
 
-export default Input
+export default Textarea

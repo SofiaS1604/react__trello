@@ -4,6 +4,13 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 
 class Header extends React.Component {
+    onChange(){
+
+    }
+
+    onClick(){
+
+    }
     render() {
         return (
             <header className="page__header header">
@@ -13,8 +20,8 @@ class Header extends React.Component {
                     </svg>
                 </div>
                 <div className="header__search search">
-                    <Input className="search__input" placeholder=""/>
-                    <Button className="search__button" value="Search"/>
+                    <Input onChange={this.onChange} typeInput="search" className="search__input" placeholder=""/>
+                    <Button className="search__button" onClick={this.onClick} value="Search"/>
                 </div>
                 <div className="header__container">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
