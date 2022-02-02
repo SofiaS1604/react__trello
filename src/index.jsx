@@ -7,7 +7,8 @@ import styles from './styles/style.styl';
 import {
     BrowserRouter,
     Routes,
-    Route
+    Route,
+    generatePath
   } from "react-router-dom";
 
   import {createBrowserHistory} from 'history'
@@ -22,5 +23,5 @@ ReactDOM.render(
       <Route path="/board/:id" element={<PageBoard/>}></Route>
     </Routes>
   </BrowserRouter>, 
-    document.getElementById("root")
-    );
+  document.getElementById("root")
+);

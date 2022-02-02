@@ -12,7 +12,7 @@ class PageHome extends React.Component {
     constructor(props) {
         super(props);
 
-        const color = ['#EEF7FB', '#F8F1FF', '#FEF7EF', 
+        this.color = ['#EEF7FB', '#F8F1FF', '#FEF7EF', 
                         '#F4F4F4', '#EBFDF5', '#F4F4FF', '#F8E8E8']
 
         this.onClick = this.onClick.bind(this);
@@ -24,7 +24,7 @@ class PageHome extends React.Component {
             title: '',
             boards: [],
             cards: [],
-            color: color[Math.floor(Math.random() * 7)]
+            color: 0
         };
     }
 
@@ -33,24 +33,47 @@ class PageHome extends React.Component {
             this.setState({isFormOn})
         else{
             let boards = JSON.parse(localStorage.getItem('boards') || '[]')
-            let id = boards.length > 0 ? boards[boards.length - 1].id + 1 : 0
-            this.setState({id, title: info[0], description: info[1]})
+            let id = boards.length > 0 ? 
+                        boards[boards.length - 1].id + 1 : 0
+
+            this.setState({
+                id, 
+                title: info[0], 
+                description: info[1], 
+                color: this.color[Math.floor(Math.random() * 7)]
+            })
+
             boards.push(this.state) 
             localStorage.setItem("boards", JSON.stringify(boards)) 
+
             this.setState({isFormOn})
         }
     }
 
     render() {
         let displayForm = this.state.isFormOn ? 'grid' : 'none';
+       
         return (
             <div className="page">
                 <Header/>
-                <Form style={{display: displayForm, animation: '0.25s ease-in-out form_find'}} title={'Create board'} onClick={this.onClick}/>
+                <Form 
+                    style={{display: displayForm, animation: '0.25s ease-in-out form_find'}} 
+                    title={'Create board'} 
+                    onClick={this.onClick}
+                />
                 <ListCardsBoard onClick={this.onClick}/>
             </div>
         );
     }
 }
+
+PageHome.propTypes = {
+    onClick: PropTypes.func
+}
+  
+PageHome.defaultProps = {
+    onClick: () => null,
+}
+
 
 export default PageHome

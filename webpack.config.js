@@ -88,7 +88,6 @@ const config = {
         new htmlWebpackHarddiskPlugin(),
 
 
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
     ]
 };

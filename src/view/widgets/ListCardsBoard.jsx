@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {debounce} from 'lodash';
 
+import PropTypes from "prop-types";
+
 import CardCreateBoard from '../components/CardCreateBoard';
 import CardBoard from '../components/CardBoard';
 
@@ -22,7 +24,11 @@ class ListCardsBoard extends React.Component {
         
         return (
             <div className="page__main">
-                <CardCreateBoard title="Create new board" onClick={this.onClick}/>
+                <CardCreateBoard 
+                    title="Create new board" 
+                    onClick={this.onClick}
+                 />
+
                 {boards.map((board) => (
                     <CardBoard 
                         key={board.id}
@@ -30,11 +36,20 @@ class ListCardsBoard extends React.Component {
                         title={board.title} 
                         text={board.description}
                         color={board.color}
-                        />
+                     />
                 ))} 
             </div>
         )
     }
 }
 
+
+ListCardsBoard.propTypes = {
+    onClick: PropTypes.func,
+}
+
+ListCardsBoard.defaultProps = {
+    onClick: () => null,
+}
+ 
 export default ListCardsBoard

@@ -183,12 +183,38 @@
 
 
 .info
+    display grid
+    justify-content space-between
+    grid-auto-flow column
+    &__container:nth-child(2)
+        display grid
+        grid-auto-flow: column
+    &__button:nth-child(2)
+        padding-left: 15px
+        padding-right: 15px
+        border-right: 2px solid #d2d1d0
+    &__button:nth-child(1)
+        padding-right: 15px
+        border-right: 2px solid #d2d1d0
+    &__button:nth-child(3)
+        padding-left: 15px
+    &__button
+        padding-top: 5px
+        padding-bottom: 5px
+        height: 45px
+        & button
+            background-size: cover; 
+            width: 32px; 
+            height: 32px;
+            border: 0; 
+            background-color: white;
+            cursor: pointer
     &__title
         font-size 26px
         font-weight 500
     &__description
         font-size 13px
-        color #8f9497
+        color #8f9497    
 
 
 .page_board .main
@@ -236,6 +262,10 @@
                 color #929292
                 font-size 13px
                 font-weight 300
+                width 322px
+                height: 20px
+                overflow hidden
+                text-overflow ellipsis
             &__title
                 font-weight 400
 

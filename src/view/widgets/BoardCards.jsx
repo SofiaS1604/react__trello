@@ -3,20 +3,23 @@ import {debounce} from 'lodash';
 import CardItem from '../components/CardItem';
 import CardCreateBoard from '../components/CardCreateBoard';
 
+import PropTypes from "prop-types";
+
 class BoardCards extends React.Component {
     constructor(props) {
         super(props);
       
         this.onClick = this.onClick.bind(this);
         this.onChangeDebounced = debounce(this.props.onClick);
-      }
+    }
 
-      onClick(type, isFormOn) {
+    onClick(type, isFormOn) {
         this.onChangeDebounced(type, isFormOn, this.props.board.id);
-      }
+    }
 
     render() {
         let cards = this.props.board.cards_id.map(el => this.props.cards.filter(card_el => card_el.id === el)[0]);
+        
         return (
             <div className="board__item">
                 <div className="board__block">
@@ -29,10 +32,21 @@ class BoardCards extends React.Component {
                         card={card}
                     />
                 ))} 
-                <CardCreateBoard title="+Add new card" onClick={this.onClick}/>
+                <CardCreateBoard 
+                    title="+Add new card" 
+                    onClick={this.onClick}
+                 />
             </div>
         )
     }
+}
+
+BoardCards.propTypes = {
+    onChange: PropTypes.func,
+}
+
+BoardCards.defaultProps = {
+    onChange: () => null,
 }
 
 export default BoardCards

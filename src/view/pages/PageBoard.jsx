@@ -1,8 +1,13 @@
 import * as React from 'react';
+import PropTypes from "prop-types";
+import {bindAll} from 'lodash'
 
 import Header from '../widgets/Header';
 import BoardCards from '../widgets/BoardCards';
 import Form from '../widgets/Form';
+import Button from '../components/Button';
+import Input from '../components/Input';
+import Textarea from '../components/Textarea';
 import FormCreateBoard from '../widgets/FormCreateBoard';
 
 class PageBoard extends React.Component {
@@ -13,14 +18,21 @@ class PageBoard extends React.Component {
             boards: JSON.parse(localStorage.getItem('boards')),
             isFormOn: false,
             board_id: null,
+            title: '',
+            description: '',
+            update_header: 0
         }
 
         this.board = this.state.boards.filter(el => el.id === this.state.id)[0];
         this.cards = this.board.cards;
         this.boards = this.board.boards;
+
         
-        this.onClick = this.onClick.bind(this);
-        this.createBoard = this.createBoard.bind(this);
+        bindAll(this, [
+            'onClick',
+            'createBoard',
+            'buttonBoard'
+        ])
     }
 
     onClick(type, isFormOn, info){
@@ -30,9 +42,16 @@ class PageBoard extends React.Component {
                 board_id: typeof info === 'number' ? info : this.state.board_id
             })
         }else{
-            let card_id = this.cards.length ? this.cards[this.cards.length - 1].id + 1 : 0
-            let card = {id: card_id, title: info[0], description: info[1]};
-            cards.push(card)
+            let card_id = this.cards.length 
+                            ? this.cards[this.cards.length - 1].id + 1 : 0
+
+            let card = {
+                id: card_id, 
+                title: info[0], 
+                description: info[1]
+            };
+            this.cards.push(card)
+
             let board = this.boards.filter(el => el.id === this.state.board_id)[0]
             board.cards_id.push(card_id)
 
@@ -45,7 +64,9 @@ class PageBoard extends React.Component {
     }
 
     createBoard(title){
-        let board_id = this.boards.length ? this.boards[boards - 1].id + 1 : 0
+        let board_id = this.boards.length 
+                            ? this.boards[this.boards.length - 1].id + 1 : 0
+
         let board = {id: board_id, title, cards_id: []};
         this.boards.push(board)
         
@@ -55,20 +76,74 @@ class PageBoard extends React.Component {
 
         localStorage.setItem('boards', JSON.stringify(this.state.boards))
     }
+
+    buttonBoard(type){
+        if(type === 'delete')
+            localStorage.setItem('boards', JSON.stringify(this.state.boards.filter(el => el.id !== this.state.id)))
+        
+        if(type === 'exit' || type === 'delete')
+            window.location.href = '../'
+
+        if(type === 'update'){
+            this.setState({
+                update_header: 1, 
+                title: this.board.title, 
+                description: this.board.description
+            })
+
+        }
+    }
     
     render() {
         let displayForm = this.state.isFormOn ? 'grid' : 'none';
         return (
             <div className="page page_board">
-                <Header></Header>
-                <Form style={{display: displayForm, animation: '0.25s ease-in-out form_find'}} title={'Create card'} onClick={this.onClick}/>
+                <Header/>
+                <Form 
+                    style={{display: displayForm, animation: '0.25s ease-in-out form_find'}} 
+                    title={'Create card'} 
+                    onClick={this.onClick}
+                />
               <div className="page__main main">
                     <div className="main__info info">
+                        {this.state.update_header < 1 &&
+                            <div className="info__container">
+                                <div className="info__title">{this.board.title}</div>
+                                <div className="info__description">{this.board.description}</div>
+                            </div>
+                        }
+
+                        {this.state.update_header === 1 &&
+                        
+                            <div className="info__container">
+                                <Input value={this.state.title}/>
+                                <Textarea value={this.state.description}/>
+                            </div>
+                        }
+
                         <div className="info__container">
-                            <div className="info__title">{this.board.title}</div>
-                            <div className="info__description">{this.board.description}</div>
+                            <div className="info__button">
+                                <Button 
+                                    type="delete" 
+                                    onClick={this.buttonBoard}
+                                    style={{backgroundImage: 'url("https://www.svgrepo.com/show/48292/delete.svg")'}}
+                                 />
+                            </div>
+                            <div className="info__button">
+                                <Button 
+                                    type="update" 
+                                    onClick={this.buttonBoard}
+                                    style={{backgroundImage: 'url("https://www.svgrepo.com/show/281825/pencil.svg")'}}
+                                 />
+                            </div>
+                            <div className="info__button">
+                                <Button 
+                                    type="exit" 
+                                    onClick={this.buttonBoard} 
+                                    style={{backgroundImage: 'url("https://www.svgrepo.com/show/361486/exit.svg")'}}
+                                />
+                            </div>
                         </div>
-                        <div className="info__container"></div>
                     </div>
                     <div className="main__boards boards">
                         {this.board.boards.map((board) => (
@@ -86,5 +161,16 @@ class PageBoard extends React.Component {
         );
     }
 }
+
+PageBoard.propTypes = {
+    createBoard: PropTypes.func,
+    onClick: PropTypes.func
+}
+  
+PageBoard.defaultProps = {
+    createBoard: () => null,
+    onClick: () => null,
+}
+  
 
 export default PageBoard

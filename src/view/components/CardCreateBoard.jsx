@@ -25,4 +25,14 @@ class CardCreateBoard extends React.Component {
     }
 }
 
+
+CardCreateBoard.propTypes = {
+    onClick: PropTypes.func,
+}
+
+CardCreateBoard.defaultProps = {
+    onClick: () => null,
+}
+  
+
 export default CardCreateBoard
