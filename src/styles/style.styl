@@ -181,14 +181,28 @@
   to 
       opacity 1
 
+.main__info
+    &--update
+        & .info__container:nth-child(1)
+            display grid
+            grid-auto-flow: row
+        & .info__description
+            resize: none
+            height: 20px
+        & .info__button:nth-child(2)
+            padding-left: 15px
+            padding-right: 15px
+            border-right: 2px solid #fff
+        & .info__title, & .info__description
+            border: 0
 
 .info
     display grid
-    justify-content space-between
     grid-auto-flow column
     &__container:nth-child(2)
         display grid
         grid-auto-flow: column
+        justify-content: end
     &__button:nth-child(2)
         padding-left: 15px
         padding-right: 15px
@@ -214,7 +228,8 @@
         font-weight 500
     &__description
         font-size 13px
-        color #8f9497    
+        color #8f9497   
+        margin-top: 2px 
 
 
 .page_board .main

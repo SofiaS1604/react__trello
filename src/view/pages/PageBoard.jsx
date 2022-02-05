@@ -31,7 +31,8 @@ class PageBoard extends React.Component {
         bindAll(this, [
             'onClick',
             'createBoard',
-            'buttonBoard'
+            'buttonBoard',
+            'onChange'
         ])
     }
 
@@ -77,6 +78,11 @@ class PageBoard extends React.Component {
         localStorage.setItem('boards', JSON.stringify(this.state.boards))
     }
 
+    onChange(type, value){
+        this.state[type] = value
+        this.setState(this.state)
+    }
+
     buttonBoard(type){
         if(type === 'delete')
             localStorage.setItem('boards', JSON.stringify(this.state.boards.filter(el => el.id !== this.state.id)))
@@ -90,12 +96,24 @@ class PageBoard extends React.Component {
                 title: this.board.title, 
                 description: this.board.description
             })
-
         }
+
+        if(type === 'check'){
+            this.board.title = this.state.title
+            this.board.description = this.state.description
+
+           localStorage.setItem('boards', JSON.stringify(this.state.boards))
+        }
+
+        if(type === 'exit_update' || type === 'check')
+            this.setState({
+                update_header: 0
+            })
     }
     
     render() {
         let displayForm = this.state.isFormOn ? 'grid' : 'none';
+
         return (
             <div className="page page_board">
                 <Header/>
@@ -105,46 +123,66 @@ class PageBoard extends React.Component {
                     onClick={this.onClick}
                 />
               <div className="page__main main">
-                    <div className="main__info info">
                         {this.state.update_header < 1 &&
-                            <div className="info__container">
-                                <div className="info__title">{this.board.title}</div>
-                                <div className="info__description">{this.board.description}</div>
+                            <div className="main__info info">
+                                <div className="info__container">
+                                    <div className="info__title">{this.board.title}</div>
+                                    <div className="info__description">{this.board.description}</div>
+                                </div>
+
+                                <div className="info__container">
+                                    <div className="info__button">
+                                        <Button 
+                                            type="delete" 
+                                            onClick={this.buttonBoard}
+                                            style={{backgroundImage: 'url("https://www.svgrepo.com/show/48292/delete.svg")'}}
+                                        />
+                                    </div>
+                                    <div className="info__button">
+                                        <Button 
+                                            type="update" 
+                                            onClick={this.buttonBoard}
+                                            style={{backgroundImage: 'url("https://www.svgrepo.com/show/281825/pencil.svg")'}}
+                                        />
+                                    </div>
+                                    <div className="info__button">
+                                        <Button 
+                                            type="exit" 
+                                            onClick={this.buttonBoard} 
+                                            style={{backgroundImage: 'url("https://www.svgrepo.com/show/361486/exit.svg")'}}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         }
 
                         {this.state.update_header === 1 &&
-                        
-                            <div className="info__container">
-                                <Input value={this.state.title}/>
-                                <Textarea value={this.state.description}/>
+                            <div className="main__info main__info--update info">
+                                <div className="info__container">
+                                    <Input typeInput="title" onChange={this.onChange} className="info__title" value={this.state.title}/>
+                                    <Textarea onChange={this.onChange} className="info__description" value={this.state.description}/>
+                                </div>
+
+                                <div className="info__container">
+                                    <div className="info__button">
+                                        <Button 
+                                            type="check" 
+                                            onClick={this.buttonBoard}
+                                            style={{backgroundImage: 'url("https://www.svgrepo.com/show/309414/checkbox-checked.svg")'}}
+                                        />
+                                    </div>
+                                    <div className="info__button">
+                                        <Button 
+                                            type="exit_update" 
+                                            onClick={this.buttonBoard}
+                                            style={{backgroundImage: 'url("https://www.svgrepo.com/show/361486/exit.svg")'}}
+                                        />
+                                    </div>
+                                    
+                                </div>
                             </div>
                         }
 
-                        <div className="info__container">
-                            <div className="info__button">
-                                <Button 
-                                    type="delete" 
-                                    onClick={this.buttonBoard}
-                                    style={{backgroundImage: 'url("https://www.svgrepo.com/show/48292/delete.svg")'}}
-                                 />
-                            </div>
-                            <div className="info__button">
-                                <Button 
-                                    type="update" 
-                                    onClick={this.buttonBoard}
-                                    style={{backgroundImage: 'url("https://www.svgrepo.com/show/281825/pencil.svg")'}}
-                                 />
-                            </div>
-                            <div className="info__button">
-                                <Button 
-                                    type="exit" 
-                                    onClick={this.buttonBoard} 
-                                    style={{backgroundImage: 'url("https://www.svgrepo.com/show/361486/exit.svg")'}}
-                                />
-                            </div>
-                        </div>
-                    </div>
                     <div className="main__boards boards">
                         {this.board.boards.map((board) => (
                             <BoardCards 
