@@ -20,7 +20,7 @@ class ListCardsBoard extends React.Component {
       }
 
     render() {
-        let boards = JSON.parse(localStorage.getItem('boards') || '[]')
+        let boards = this.props.boards
         
         return (
             <div className="page__main">

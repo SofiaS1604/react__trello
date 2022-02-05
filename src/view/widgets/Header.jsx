@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {bindAll, debounce} from 'lodash'
 
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -6,6 +7,39 @@ import Button from '../components/Button';
 import PropTypes from "prop-types";
 
 class Header extends React.Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            boards: JSON.parse(localStorage.getItem('boards')),
+            value: ''
+        }
+
+        bindAll(this, [
+            'onClick',
+            'onChange'
+        ])
+
+        this.onClickDebounced = debounce(this.props.onClick);
+    }
+
+
+    onClick(){
+        let search_boards = this.state.boards.filter(el => 
+                                el.title.toLocaleLowerCase().split(this.state.value).length > 1 ||
+                                 el.description.toLocaleLowerCase().split(this.state.value).length > 1)
+        
+        if (!search_boards.length) 
+            search_boards = JSON.parse(localStorage.getItem('boards'))
+
+        this.onClickDebounced('form_search', false, search_boards);
+    }
+
+    onChange(type, value){
+        this.setState({value})
+    }
+
+
     render() {
         return (
             <header className="page__header header">
@@ -16,9 +50,12 @@ class Header extends React.Component {
                 </div>
                 <div className="header__search search">
                     <Input 
+                        onChange={this.onChange}
                         typeInput="search" 
                         className="search__input"/>
                     <Button 
+                        type="search"
+                        onClick={this.onClick}
                         className="search__button" 
                         value="Search"/>
                 </div>

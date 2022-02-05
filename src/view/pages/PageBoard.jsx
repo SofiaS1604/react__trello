@@ -26,7 +26,6 @@ class PageBoard extends React.Component {
         this.board = this.state.boards.filter(el => el.id === this.state.id)[0];
         this.cards = this.board.cards;
         this.boards = this.board.boards;
-
         
         bindAll(this, [
             'onClick',

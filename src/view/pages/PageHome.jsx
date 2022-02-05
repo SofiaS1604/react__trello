@@ -22,16 +22,20 @@ class PageHome extends React.Component {
             isFormOn: false, 
             description: '', 
             title: '',
-            boards: [],
+            boards: JSON.parse(localStorage.getItem('boards') || '[]'),
             cards: [],
             color: 0
         };
     }
 
     onClick(type, isFormOn, info){
+        console.log(type)
         if(type == 'form_close' || type === 'form_open')
             this.setState({isFormOn})
-        else{
+        else if (type === 'form_search'){
+            this.setState({boards: info}) 
+            console.log(info)
+        }else{
             let boards = JSON.parse(localStorage.getItem('boards') || '[]')
             let id = boards.length > 0 ? 
                         boards[boards.length - 1].id + 1 : 0
@@ -46,7 +50,7 @@ class PageHome extends React.Component {
             boards.push(this.state) 
             localStorage.setItem("boards", JSON.stringify(boards)) 
 
-            this.setState({isFormOn})
+            this.setState({isFormOn, boards})
         }
     }
 
@@ -55,13 +59,13 @@ class PageHome extends React.Component {
        
         return (
             <div className="page">
-                <Header/>
+                <Header onClick={this.onClick}/>
                 <Form 
                     style={{display: displayForm, animation: '0.25s ease-in-out form_find'}} 
                     title={'Create board'} 
                     onClick={this.onClick}
                 />
-                <ListCardsBoard onClick={this.onClick}/>
+                <ListCardsBoard boards={this.state.boards} onClick={this.onClick}/>
             </div>
         );
     }
