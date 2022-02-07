@@ -24,8 +24,6 @@ class PageBoard extends React.Component {
         }
 
         this.board = this.state.boards.filter(el => el.id === this.state.id)[0];
-        this.cards = this.board.cards;
-        this.boards = this.board.boards;
         
         bindAll(this, [
             'onClick',
@@ -35,24 +33,41 @@ class PageBoard extends React.Component {
         ])
     }
 
+    groupClick(type, info){
+        if (type === 'delete_group'){
+            this.board.boards = this.board.boards.filter(el => el.id !== info[0])
+            this.setState({'boards': this.state.boards})
+        }
+
+        if(type === 'save_group'){
+            let board = this.board.boards.filter(el => el.id === info[0])[0]
+            board.title = info[1]
+            this.setState({'boards': this.state.boards})
+        }
+
+        localStorage.setItem('boards', JSON.stringify(this.state.boards))
+    }
+
     onClick(type, isFormOn, info){
         if (type === 'form_open' || type === 'form_close'){
             this.setState({
                 isFormOn,
-                board_id: typeof info === 'number' ? info : this.state.board_id
+                board_id: typeof info[0] === 'number' ? info[0] : this.state.board_id
             })
+        }else if(type.split('group').length > 1){
+            this.groupClick(type, info)
         }else{
-            let card_id = this.cards.length 
-                            ? this.cards[this.cards.length - 1].id + 1 : 0
+            let card_id = this.board.cards.length 
+                            ? this.board.cards[this.board.cards.length - 1].id + 1 : 0
 
             let card = {
                 id: card_id, 
                 title: info[0], 
                 description: info[1]
             };
-            this.cards.push(card)
+            this.board.cards.push(card)
 
-            let board = this.boards.filter(el => el.id === this.state.board_id)[0]
+            let board = this.board.boards.filter(el => el.id === this.state.board_id)[0]
             board.cards_id.push(card_id)
 
             this.setState({
@@ -64,17 +79,18 @@ class PageBoard extends React.Component {
     }
 
     createBoard(title){
-        let board_id = this.boards.length 
-                            ? this.boards[this.boards.length - 1].id + 1 : 0
+        let board_id = this.board.boards.length 
+                            ? this.board.boards[this.board.boards.length - 1].id + 1 : 0
 
         let board = {id: board_id, title, cards_id: []};
-        this.boards.push(board)
+        this.board.boards.push(board)
         
         this.setState({
             isFormOn: false
         })
 
         localStorage.setItem('boards', JSON.stringify(this.state.boards))
+        console.log(this.state.boards);
     }
 
     onChange(type, value){
@@ -186,6 +202,7 @@ class PageBoard extends React.Component {
                         {this.board.boards.map((board) => (
                             <BoardCards 
                                 key={board.id}
+                                id={board.id}
                                 board={board}
                                 cards={this.board.cards}
                                 onClick={this.onClick}

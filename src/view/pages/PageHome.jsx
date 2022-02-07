@@ -29,13 +29,11 @@ class PageHome extends React.Component {
     }
 
     onClick(type, isFormOn, info){
-        console.log(type)
         if(type == 'form_close' || type === 'form_open')
             this.setState({isFormOn})
-        else if (type === 'form_search'){
+        else if (type === 'form_search')
             this.setState({boards: info}) 
-            console.log(info)
-        }else{
+        else{
             let boards = JSON.parse(localStorage.getItem('boards') || '[]')
             let id = boards.length > 0 ? 
                         boards[boards.length - 1].id + 1 : 0

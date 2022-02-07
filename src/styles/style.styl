@@ -232,7 +232,32 @@
         font-size 13px
         color #8f9497   
         margin-top: 2px 
-
+.board
+    &__input
+        background-color: transparent
+        border: 0
+    &__buttons
+        display grid
+        grid-auto-flow: column
+        justify-content: end
+        & .button__item:nth-child(2)
+            padding-left: 10px
+            padding-right: 10px
+            border-right: 2px solid #d2d1d0
+        & .button__item:nth-child(1)
+            padding-right: 10px
+            border-right: 2px solid #d2d1d0
+        & .button__item:nth-child(3)
+            padding-left: 10px
+        & .button__item
+            height: 25px
+            & button
+                background-size: cover; 
+                width: 25px; 
+                height: 25px;
+                border: 0; 
+                background-color: transparent;
+                cursor: pointer
 
 .page_board .main
     display grid
@@ -332,3 +357,15 @@
     justify-items center
     overflow-x overlay
     padding-bottom: 20px
+
+
+.board__block--update
+    & input
+        padding: 0
+        outline: none
+        font-weight: 500
+        font-size: 16px
+    & .button__item:nth-child(2)
+        border-right: 0
+        padding-right 0
+    
